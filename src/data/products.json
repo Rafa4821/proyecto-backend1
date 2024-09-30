@@ -1,0 +1,59 @@
+[
+    {
+        "id": "1",
+        "title": "The Last of Us Part II",
+        "description": "La secuela del aclamado juego de acción y aventura, The Last of Us.",
+        "code": "PS001",
+        "price": 59.99,
+        "status": true,
+        "stock": 20,
+        "category": "Acción/Aventura",
+        "platform": "PlayStation 4",
+        "releaseYear": 2020,
+        "developer": "Naughty Dog"
+    },
+    {
+        "id": "2",
+        "title": "God of War",
+        "description": "Kratos regresa en una nueva aventura épica ambientada en la mitología nórdica.",
+        "code": "PS002",
+        "price": 39.99,
+        "status": true,
+        "stock": 15,
+        "category": "Acción",
+        "platform": "PlayStation 4",
+        "releaseYear": 2018,
+        "developer": "Santa Monica Studio"
+    },
+    {
+        "id": "3",
+        "title": "Spider-Man: Miles Morales",
+        "description": "Sigue las aventuras de Miles Morales mientras toma el manto de Spider-Man.",
+        "code": "PS003",
+        "price": 49.99,
+        "status": true,
+        "stock": 10,
+        "category": "Acción/Aventura",
+        "platform": "PlayStation 5",
+        "releaseYear": 2020,
+        "developer": "Insomniac Games"
+    },
+    {
+        "id": "4",
+        "title": "Horizon Forbidden West",
+        "description": "Aloy se aventura en el Oeste Prohibido para descubrir nuevos peligros y secretos.",
+        "code": "PS004",
+        "price": 69.99,
+        "status": true,
+        "stock": 25,
+        "category": "RPG",
+        "platform": "PlayStation 5",
+        "releaseYear": 2022,
+        "developer": "Guerrilla Games"
+    },
+  {
+    "id": "1727715016507",
+    "status": true,
+    "thumbnails": []
+  }
+]

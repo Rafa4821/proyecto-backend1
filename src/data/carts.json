@@ -1,0 +1,39 @@
+[
+  {
+    "id": "1",
+    "products": [
+      {
+        "id": "2",
+        "title": "God of War",
+        "price": 39.99,
+        "quantity": 1,
+        "subtotal": 39.99
+      },
+      {
+        "id": "3",
+        "title": "Spider-Man: Miles Morales",
+        "price": 49.99,
+        "quantity": 2,
+        "subtotal": 99.98
+      }
+    ],
+    "total": 139.97
+  },
+  {
+    "id": "2",
+    "products": [
+      {
+        "id": "1",
+        "title": "The Last of Us Part II",
+        "price": 59.99,
+        "quantity": 1,
+        "subtotal": 59.99
+      }
+    ],
+    "total": 59.99
+  },
+  {
+    "id": "1727715142183",
+    "products": []
+  }
+]
