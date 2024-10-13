@@ -52,8 +52,9 @@
         "developer": "Guerrilla Games"
     },
   {
-    "id": "1727715016507",
-    "status": true,
-    "thumbnails": []
+    "title": "Uncharted",
+    "description": "Juego de aventura",
+    "price": "69",
+    "id": "1728848791510"
   }
 ]
