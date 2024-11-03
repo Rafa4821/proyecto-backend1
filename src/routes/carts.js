@@ -1,72 +1,63 @@
 import { Router } from 'express';
-import fs from 'fs';
+import Cart from '../models/Cart.js';
+import Product from '../models/Product.js';
 
 const router = Router();
-const cartsFilePath = './src/data/carts.json';
-const productsFilePath = './src/data/products.json';
 
-const readCartsFile = () => {
-    const data = fs.readFileSync(cartsFilePath);
-    return JSON.parse(data);
-};
-
-const readProductsFile = () => {
-    const data = fs.readFileSync(productsFilePath);
-    return JSON.parse(data);
-};
-
-router.get('/', (req, res) => {
-    const carts = readCartsFile();
-    res.json(carts);
-});
-
-router.post('/', (req, res) => {
-    const carts = readCartsFile();
-    const newCart = {
-        id: Date.now().toString(),
-        products: []
-    };
-    carts.push(newCart);
-    fs.writeFileSync(cartsFilePath, JSON.stringify(carts, null, 2));
-    res.status(201).json(newCart);
-});
-
-router.get('/:cid', (req, res) => {
-    const { cid } = req.params;
-    const carts = readCartsFile();
-    const cart = carts.find(c => c.id === cid);
-    if (!cart) return res.status(404).json({ message: 'Cart not found' });
-    res.json(cart);
-});
-
-router.post('/:cid/product/:pid', (req, res) => {
-    const { cid, pid } = req.params;
-    const carts = readCartsFile();
-    const products = readProductsFile();
-
-    const cart = carts.find(c => c.id === cid);
-    if (!cart) return res.status(404).json({ message: 'Cart not found' });
-
-    const product = products.find(p => p.id === pid);
-    if (!product) return res.status(404).json({ message: 'Product not found' });
-
-    const cartProduct = cart.products.find(p => p.id === pid);
-
-    if (cartProduct) {
-        cartProduct.quantity += 1;
-        cartProduct.subtotal = cartProduct.price * cartProduct.quantity;
-    } else {
-        cart.products.push({ 
-            id: pid, 
-            title: product.title, 
-            price: product.price, 
-            quantity: 1,
-            subtotal: product.price 
-        });
+// GET all carts
+router.get('/', async (req, res) => {
+    try {
+        const carts = await Cart.find().populate('products.product');
+        res.json(carts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
+});
 
-    fs.writeFileSync(cartsFilePath, JSON.stringify(carts, null, 2));
-    res.status(201).json(cart);
+// POST a new cart
+router.post('/', async (req, res) => {
+    try {
+        const newCart = new Cart();
+        await newCart.save();
+        res.status(201).json(newCart);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// GET a cart by id
+router.get('/:cid', async (req, res) => {
+    try {
+        const cart = await Cart.findById(req.params.cid).populate('products.product');
+        if (!cart) return res.status(404).json({ message: 'Carrito no encontrado' });
+        res.json(cart);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// POST add a product to a cart
+router.post('/:cid/product/:pid', async (req, res) => {
+    try {
+        const cart = await Cart.findById(req.params.cid);
+        if (!cart) return res.status(404).json({ message: 'Carrito no encontrado' });
+
+        const product = await Product.findById(req.params.pid);
+        if (!product) return res.status(404).json({ message: 'Producto no encontrado' });
+
+        const cartProduct = cart.products.find(p => p.product.equals(product._id));
+
+        if (cartProduct) {
+            cartProduct.quantity += 1;
+        } else {
+            cart.products.push({ product: product._id, quantity: 1 });
+        }
+
+        await cart.save();
+        res.status(201).json(cart);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 export default router;

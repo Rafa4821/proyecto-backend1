@@ -4,49 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 20px;
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        h1 {
-            font-size: 24px;
-            color: #333;
-            text-align: center;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
-            font-size: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        li strong {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
-    <h1>Lista de productos</h1>
-    <ul>
-        {{#each products}}
-        <li>
-            <div>
-                <strong>{{this.title}}</strong>: {{this.description}} - ${{this.price}}
-            </div>
-        </li>
-        {{/each}}
-    </ul>
+    <h1>Lista de Productos</h1>
+<div class="card-container">
+    {{#each products}}
+    <div class="card">
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p><strong>Precio:</strong> ${{this.price}}</p>
+    </div>
+    {{/each}}
+</div>
+
 </body>
 </html>
